@@ -29,19 +29,62 @@ class LinkedList:
         self.length += 1
         return True
 
+    def remove_last_node(self):
+        if self.length == 0:
+            return None
 
-my_linked_list = LinkedList(4)
+        temp = self.head
+        pre = self.head
+
+        while temp.next is not None:
+            pre = temp
+            temp = temp.next
+        self.tail = pre
+        self.tail.next = None
+        self.length -= 1
+
+        if self.length == 0:
+            self.head = None
+            self.tail = None
+        return temp
+
+    def prepend_node(self, value):
+        new_node = Node(value)
+        if self.length == 0:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node.next = self.head
+            self.head = new_node
+        self.length += 1
+        return True
+
+    def pop_first_node(self):
+        if self.length == 0:
+            return None
+
+        else:
+            temp = self.head
+            self.head = self.head.next
+            temp.next = None
+            self.length -= 1
+            if self.length == 0:
+                self.tail = None
+        return temp
 
 
-print('Head:', my_linked_list.head.value)
-print('Tail:', my_linked_list.tail.value)
-print('Length:', my_linked_list.length)
+# my_linked_list = LinkedList(4)
+#
+#
+# print('Head:', my_linked_list.head.value)
+# print('Tail:', my_linked_list.tail.value)
+# print('Length:', my_linked_list.length)
 
-my_linked_list = LinkedList(1)
+my_linked_list = LinkedList(2)
+my_linked_list.append_node(1)
 
-my_linked_list.append_node(2)
-
-my_linked_list.print_list()
-
+print(my_linked_list.pop_first_node())
+print(my_linked_list.pop_first_node())
+print(my_linked_list.pop_first_node())
 
 
