@@ -59,7 +59,7 @@ class LinkedList:
         self.length += 1
         return True
 
-    def pop_first_node(self):
+    def remove_first_node(self):
         if self.length == 0:
             return None
 
@@ -88,6 +88,40 @@ class LinkedList:
             return True
         return False
 
+    def insert_node_at_index(self, index, value):
+        if index < 0 or index > self.length:
+            return False
+        if index == 0:
+            return self.prepend_node(value)
+        if index == self.length:
+            return self.append_node(value)
+
+        new_node = Node(value)
+        temp = self.get_node_index(index - 1)
+        new_node.next = temp.next
+        temp.next = new_node
+        self.length += 1
+        return True
+
+    def remove_node_at_index(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        if index == 0:
+            return self.remove_first_node()
+        if index == self.length - 1:
+            return self.remove_last_node()
+        prev = self.get_node_index(index - 1)
+        temp = prev.next
+        prev.next = temp.next
+        temp.next = None
+        self.length -= 1
+        return temp
+
+    def reverse_list(self):
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+
 
 # my_linked_list = LinkedList(4)
 #
@@ -101,11 +135,11 @@ my_linked_list.append_node(3)
 my_linked_list.append_node(23)
 my_linked_list.append_node(7)
 
-my_linked_list.print_list()
-
-my_linked_list.set_value(1, 4)
+print(my_linked_list.remove(2), '\n')
 
 my_linked_list.print_list()
+
+
 
 
 
