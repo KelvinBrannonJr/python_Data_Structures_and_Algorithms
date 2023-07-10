@@ -72,6 +72,22 @@ class LinkedList:
                 self.tail = None
         return temp
 
+    def get_node_index(self, index):
+        if index < 0 or index >= self.length:
+            return None
+
+        temp = self.head
+        for _ in range(index):
+            temp = temp.next
+        return temp
+
+    def set_value(self, index, value):
+        temp = self.get_node_index(index)
+        if temp is not None:
+            temp.value = value
+            return True
+        return False
+
 
 # my_linked_list = LinkedList(4)
 #
@@ -80,11 +96,18 @@ class LinkedList:
 # print('Tail:', my_linked_list.tail.value)
 # print('Length:', my_linked_list.length)
 
-my_linked_list = LinkedList(2)
-my_linked_list.append_node(1)
+my_linked_list = LinkedList(11)
+my_linked_list.append_node(3)
+my_linked_list.append_node(23)
+my_linked_list.append_node(7)
 
-print(my_linked_list.pop_first_node())
-print(my_linked_list.pop_first_node())
-print(my_linked_list.pop_first_node())
+my_linked_list.print_list()
+
+my_linked_list.set_value(1, 4)
+
+my_linked_list.print_list()
+
+
+
 
 
